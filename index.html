@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+    <title>Taxi App</title>
+    <style>
+        .angular-google-map-container {
+            width: 100%;
+            height: 504px;
+        }
+    </style>
+
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+    <link href="lib/ionic.css" rel="stylesheet">
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic.bundle.js"></script>
+
+    <script src="app.js"></script>
+
+    <!-- your project references -->
+    <link href="css/index.css" rel="stylesheet" />
+
+</head>
+<body animation="slide-left-right-ios7">
+    
+    <div>
+        <div>
+            <ion-nav-bar class="bar-stable">
+                <ion-nav-back-button class="button-icon icon ion-ios7-arrow-back">Back</ion-nav-back-button>
+            </ion-nav-bar>
+            <ion-nav-view></ion-nav-view>
+        </div>
+    </div>
+    <script  id="page1.html" type="text/ng-template">
+        <ion-view title="Search">
+            <ion-content padding="true" class="has-header">
+                <form>
+                    <label class="item item-input" name="search">
+                        <i class="icon ion-search placeholder-icon"></i>
+                        <input type="search" placeholder="Enter Rego or ID">
+                    </label>
+                </form>
+                <ul ng-controller="taxilist">
+
+                    <li ng-repeat="profile in taxies">{{profile}}</li>
+                </ul>
+            </ion-content>
+        </ion-view>
+    </script>
+    <script id="page3.html" type="text/ng-template">
+        <ion-view title="New Incident">
+            <ion-contentn data-ng-controller="thiscontroller" padding="true" class="has-header">
+                <h1>Record Incident</h1>
+                <form>
+                    <label class="item item-input" name="t_reg">
+                        <span class="input-label">Registration</span>
+                        <input type="text" placeholder="FGKXXX">
+                    </label>
+                    <label class="item item-input" name="t_num">
+                        <span class="input-label">Taxi #</span>
+                        <input type="text" placeholder="51">
+                    </label>
+                    <label class="item item-select" name="Incident Type">
+                        <span class="input-label">Incident Type</span>
+                        <select>Fight</select>
+                        <select>Park in the wrong place</select>
+                        <select>uglycar</select>
+                    </label>
+                    <label class="item item-input" name="IncidentDescription">
+                        <span class="input-label"></span><textarea placeholder="Incident Description... "> </textarea>
+                    </label>
+                    <ion-toggle toggle-class="toggle-positive" name="banaction">Ban</ion-toggle>
+                </form>
+                <button class="button  button-icon button-small icon-left ion-android-camera"></button>
+                <button ng-click="showConfirm()" class="button  button-icon button-block  icon-left ion-android-add">Submit Report</button>
+            </ion-contentn>
+        </ion-view>
+    </script>
+    <script id="page4.html" type="text/ng-template">
+        <ion-view title="Home">
+            <ion-content padding="true" class="has-header">
+                <a href="#newincidnet" class="button button-stable button-outline  icon-right ion-alert-circled"></a>
+                <a href="#Search" class="button button-stable button-outline  icon-left ion-search"></a>
+            </ion-content>
+        </ion-view>
+    </script>
+    <script src="cordova.js"></script>
+    <script src="scripts/platformOverrides.js"></script>
+</body>
+</html>
