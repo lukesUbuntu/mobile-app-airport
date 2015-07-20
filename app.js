@@ -66,9 +66,9 @@ angular.module('app', ['ionic'])
     // Each state's controller can be found in controllers.js
     $stateProvider
 
-        .state('page4', {
+        .state('home', {
             url: '/home',
-            templateUrl: 'page4.html'
+            templateUrl: '/views/home.html'
         })
 
 
