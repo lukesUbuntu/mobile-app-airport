@@ -20,19 +20,19 @@
 
     <script src="app.js"></script>
 
-    <!-- your project references -->
+    <!-- Use this for custom CSS -->
     <link href="css/index.css" rel="stylesheet" />
 
 </head>
-
+ <!-- When moving between views it will slide in to view -->
 <body animation="slide-left-right-ios7">
    
     <div ng-view></div>
-
     <div>
         <div>
+            <!-- Nav bar and icons -->
             <ion-nav-bar class="bar-positive">
-
+                <!-- back button, not visiable on the home page -->
                 <ion-nav-back-button class="button-icon icon ion-ios7-arrow-back">Back</ion-nav-back-button>
                 <ion-nav-buttons side="secondary">
                 <a class="button-icon ion-android-search larger" href="#search"></a>
@@ -44,22 +44,7 @@
     </div>
    
     
- 
-
-
-
-    <script id="page4.html" type="text/ng-template">
-        <ion-view title="Home">
-            <ion-content padding="true" class="has-header">
-                <a href="#login" class="button button-stable button-outline  icon-right ion-alert-circled"></a>
-                <lable>log-in page</lable>
-                <a href="#newincident" class="button button-stable button-outline  icon-right ion-alert-circled"></a>
-                <label>new incident page</label>
-                <a href="#search" class="button button-stable button-outline  icon-left ion-search"></a>
-                <label>search page</label>
-            </ion-content>
-        </ion-view>
-    </script>
+    <!-- Cordova includes, best to keep these at the end of the page -->
     <script src="cordova.js"></script>
     <script src="scripts/platformOverrides.js"></script>
 </body>
