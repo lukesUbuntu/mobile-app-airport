@@ -117,6 +117,9 @@
     <Content Include="lib\ionic.min.css" />
     <Content Include="merges\android\scripts\android2.3-jscompat.js" />
     <Content Include="merges\android\scripts\platformOverrides.js" />
+    <Content Include="views\login.html" />
+    <Content Include="views\newincident.html" />
+    <Content Include="views\search.html" />
     <Folder Include="merges\ios\" />
     <Content Include="merges\windows\scripts\platformOverrides.js" />
     <Content Include="merges\windows\scripts\winstore-jscompat.js" />

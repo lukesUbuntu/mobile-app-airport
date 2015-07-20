@@ -1,0 +1,30 @@
+﻿<ion-view title="New Incident">
+    <ion-contentn data-ng-controller="thiscontroller" padding="true" class="has-header">
+        <h1>Record Incident</h1>
+        <form>
+            <label class="item item-input" name="t_reg">
+                <span class="input-label">Registration</span>
+                <input type="text" placeholder="FGKXXX">
+            </label>
+            <label class="item item-input" name="t_num">
+                <span class="input-label">Taxi #</span>
+                <input type="text" placeholder="51">
+            </label>
+            <label class="item item-select" name="Incident Type">
+                <span class="input-label">Incident Type</span>
+                <select>
+                    <option selected>please choose one</option>
+                    <option>Park in the wrong place</option>
+                    <option>uglycar</option>
+                    <option>Driver is a Dick</option>
+          </select>
+            </label>
+            <label class="item item-input" name="IncidentDescription">
+                <span class="input-label"></span><textarea placeholder="Incident Description... "> </textarea>
+            </label>
+            <ion-toggle toggle-class="toggle-positive" name="banaction">Ban</ion-toggle>
+        </form>
+        <button class="button  button-icon button-small icon-left ion-android-camera"></button>
+        <button ng-click="showConfirm()" class="button  button-icon button-block  icon-left ion-android-add">Submit Report</button>
+    </ion-contentn>
+</ion-view>

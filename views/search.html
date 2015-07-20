@@ -1,0 +1,14 @@
+﻿<ion-view title="Search">
+    <ion-content padding="true" class="has-header">
+        <form>
+            <label class="item item-input" name="search">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" placeholder="Enter Rego or ID">
+            </label>
+        </form>
+        <ul ng-controller="taxilist">
+
+            <li ng-repeat="profile in taxies">{{profile}}</li>
+        </ul>
+    </ion-content>
+</ion-view>

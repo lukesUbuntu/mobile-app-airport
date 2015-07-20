@@ -71,15 +71,20 @@ angular.module('app', ['ionic'])
             templateUrl: 'page4.html'
         })
 
-      .state('page1', {
-          url: '/Search',
-          templateUrl: 'page1.html'
-      })
 
-      .state('page3', {
-          url: '/newincidnet',
-          templateUrl: 'page3.html'
+        .state('search', {
+            url: '/search',
+            templateUrl: '/views/search.html'
+        })
+
+      .state('newincident', {
+          url: '/newincident',
+          templateUrl: '/views/newincident.html'
       })
+    .state('login', {
+        url: '/login',
+        templateUrl: '/views/login.html'
+    })
 
       
     ;
