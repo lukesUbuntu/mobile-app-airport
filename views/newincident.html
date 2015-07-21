@@ -1,5 +1,5 @@
 ﻿<ion-view title="New Incident">
-    <ion-contentn data-ng-controller="thiscontroller" padding="true" class="has-header">
+    <ion-contentn data-ng-controller="cameracontrol" padding="true" class="has-header">
         <h1>Record Incident</h1>
         <form>
             <label class="item item-input" name="t_reg">
@@ -17,14 +17,17 @@
                     <option>Park in the wrong place</option>
                     <option>uglycar</option>
                     <option>Driver is a Dick</option>
-          </select>
+                </select>
             </label>
             <label class="item item-input" name="IncidentDescription">
                 <span class="input-label"></span><textarea placeholder="Incident Description... "> </textarea>
             </label>
             <ion-toggle toggle-class="toggle-assertive" name="banaction">Ban</ion-toggle>
         </form>
-        <button class="button  button-icon button-small icon-left ion-android-camera"></button>
-        <button ng-click="showConfirm()" class="button  button-icon button-block  icon-left ion-android-add">Submit Report</button>
+        <button data-ng-click="takePicture()" class="button  button-icon button-small icon-left ion-android-camera" ng-click="takePicture()"></button>
+        <button class="button  button-icon button-block  icon-left ion-android-add">Submit Report</button>
+
+        <!-- ng-click="showConfirm()"-->
+
     </ion-contentn>
 </ion-view>

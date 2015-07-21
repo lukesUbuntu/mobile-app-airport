@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "Ionic Blank Template1", "Ionic Blank Template1.jsproj", "{0D05EE48-C3FF-4838-A95D-C3A8E3469E79}"
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "airportapp", "airportapp.jsproj", "{0D05EE48-C3FF-4838-A95D-C3A8E3469E79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{26920748-360A-4155-A20B-A0300D6B95D5}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
