@@ -22,6 +22,8 @@ angular.module('app', ['ionic'])
 })
 
 
+    
+
    .controller('taxilist', function ($scope) {
        
         $scope.taxies = [
@@ -66,20 +68,25 @@ angular.module('app', ['ionic'])
     // Each state's controller can be found in controllers.js
     $stateProvider
 
-        .state('page4', {
+        .state('home', {
             url: '/home',
-            templateUrl: 'page4.html'
+            templateUrl: 'views/home.html'
         })
 
-      .state('page1', {
-          url: '/Search',
-          templateUrl: 'page1.html'
-      })
 
-      .state('page3', {
-          url: '/newincidnet',
-          templateUrl: 'page3.html'
+        .state('search', {
+            url: '/search',
+            templateUrl: 'views/search.html'
+        })
+
+      .state('newincident', {
+          url: '/newincident',
+          templateUrl: 'views/newincident.html'
       })
+    .state('login', {
+        url: '/login',
+        templateUrl: 'views/login.html'
+    })
 
       
     ;
