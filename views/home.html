@@ -1,12 +1,13 @@
-﻿<ion-view title="Home">
+﻿<ion-view title="Home" ng-controller="searchTaxi">
     <ion-content padding="true" class="has-header">
         <div class="spacer" style="width: 300px; height: 193px;"></div>
-        <form>
+        <div>
             <label class="item item-input" name="search">
                 <span class="input-label">Search</span>
-                <input type="text" placeholder="search..">
+                <input ng-model="taxi.registration" type="text" placeholder="search..">
+
             </label>
-        </form>
-        <button class="button button-positive button-block ">Search</button>
+        </div>
+        <button ng-click="search(taxi.registration)" class="button button-positive button-block ">Search</button>
     </ion-content>
 </ion-view>

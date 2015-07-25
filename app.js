@@ -5,6 +5,11 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
+var api = {
+    path : "",
+    key  : ""
+}
+
 angular.module('app', ['ionic'])
 
 .run(function ($ionicPlatform) {
@@ -53,12 +58,35 @@ angular.module('app', ['ionic'])
         });
     };
 
-
-
-
-
   
 })
+
+//search a taxi record
+.controller('searchTaxi', function ($scope) {
+    //for testing purposes
+    console.log("$scope", $scope)
+    //$scope.taxi = { registration: 'test' }
+    $scope.search = function (registration) {
+        console.log("reg", registration)
+        //check reg
+        if (registration.length < 3) return false; //return error message no reg
+
+        //https://docs.angularjs.org/api/ng/service/$http
+        $http({
+            method: 'JSONP',
+            url: api.path , 
+            data : {    
+                taxi : registration
+            },
+        }).success(function (data, status, headers, config) {
+            console.log("data",data);
+          
+        }).error(function (data, status, headers, config) {
+        });
+        
+
+})
+
 
 .config(function ($stateProvider, $urlRouterProvider) {
 
