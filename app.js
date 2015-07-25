@@ -31,14 +31,14 @@ angular.module('app', ['ionic'])
 
    .controller('taxilist', function ($scope) {
        
-        $scope.taxies = [
-        { rego: "FRG567", Name: "John Smith", Cab: "22" },
-        { rego: "KGV456", Name: "Jane Smith", Cab: "18" },
-        { rego: "bgh768", Name: "Ben Smith", Cab: "65" },
-        { rego: "kdg568", Name: "Sam Smith", Cab: "121" },
-        { rego: "kkf844", Name: "Neil Smith", Cab: "94" }];
+       $scope.taxies = [
+       { rego: "FRG567", Name: "John Smith", Cab: "22" },
+       { rego: "KGV456", Name: "Jane Smith", Cab: "18" },
+       { rego: "bgh768", Name: "Ben Smith", Cab: "65" },
+       { rego: "kdg568", Name: "Sam Smith", Cab: "121" },
+       { rego: "kkf844", Name: "Neil Smith", Cab: "94" }];
 
-    })
+   })
 
 
 .controller('thiscontroller', function ($scope, $ionicPopup, $timeout) {
@@ -62,30 +62,32 @@ angular.module('app', ['ionic'])
 })
 
 //search a taxi record
-.controller('searchTaxi', function ($scope) {
+.controller('searchTaxi',['$scope', '$http', function ($scope, $http){
     //for testing purposes
     console.log("$scope", $scope)
     //$scope.taxi = { registration: 'test' }
     $scope.search = function (registration) {
         console.log("reg", registration)
         //check reg
-        if (registration.length < 3) return false; //return error message no reg
+        if (typeof registration == "undefined" || registration.length < 3) return false; //return error message no reg
 
         //https://docs.angularjs.org/api/ng/service/$http
         $http({
             method: 'JSONP',
-            url: api.path , 
-            data : {    
-                taxi : registration
-            },
+            url: api.path,
+            data: {
+                taxi: registration
+            }
         }).success(function (data, status, headers, config) {
-            console.log("data",data);
-          
+            console.log("success data", data);
+
         }).error(function (data, status, headers, config) {
-        });
+            console.log("error data", data);
+        })
+    }
         
 
-})
+}])
 
 
 .config(function ($stateProvider, $urlRouterProvider) {
