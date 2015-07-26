@@ -9,5 +9,36 @@
             </label>
         </div>
         <button ng-click="search(taxi.registration)" class="button button-positive button-block ">Search</button>
+        <small>Use : ERE576 for test</small>
+        <div ng-show="searchResults" class="ng-hide">
+
+                <ion-content>
+                    <!-- our list and list items -->
+                    <ion-list >
+                        <ion-item>
+                            <div class="row">
+                                <div class="col col-50">
+                                    Make
+                                </div>
+                                <div class="col">
+                                    {{taxi_info.vehicle.make + " " + taxi_info.vehicle.model + " " + taxi_info.vehicle.year}}
+                                </div>
+                            </div>
+                         </ion-item>
+                        <ion-item>
+                            <div class="row">
+                                <div class="col col-50">
+                                    ATO
+                                </div>
+                                <div class="col">
+                                    {{taxi_info.ato}}
+                                </div>
+                            </div>
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+        </div>
+      
+
     </ion-content>
 </ion-view>
