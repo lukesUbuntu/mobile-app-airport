@@ -5,10 +5,16 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
+
 var api = {
-    path : "",
-    key  : ""
+    path: "http://taxi.nzhost.me/api/",
+    key: "",
+    call: function (call) {
+        return this.path + call + '?callback=JSON_CALLBACK';
+    }
 }
+
+
 
 angular.module('app', ['ionic'])
 
@@ -27,9 +33,8 @@ angular.module('app', ['ionic'])
 })
 
 
-    
-
-   .controller('taxilist', function ($scope) {
+ 
+.controller('taxilist', function ($scope) {
        
        $scope.taxies = [
        { rego: "FRG567", Name: "John Smith", Cab: "22" },
@@ -39,7 +44,6 @@ angular.module('app', ['ionic'])
        { rego: "kkf844", Name: "Neil Smith", Cab: "94" }];
 
    })
-
 
 .controller('thiscontroller', function ($scope, $ionicPopup, $timeout) {
   
@@ -63,26 +67,29 @@ angular.module('app', ['ionic'])
 
 //search a taxi record
 .controller('searchTaxi',['$scope', '$http', function ($scope, $http){
-    //for testing purposes
-    console.log("$scope", $scope)
-    //$scope.taxi = { registration: 'test' }
+  
     $scope.search = function (registration) {
         console.log("reg", registration)
         //check reg
+        //@todo add no registration was provided
         if (typeof registration == "undefined" || registration.length < 3) return false; //return error message no reg
 
         //https://docs.angularjs.org/api/ng/service/$http
-        $http({
-            method: 'JSONP',
-            url: api.path,
-            data: {
-                taxi: registration
+        $http.jsonp(api.call('getRegistration'),{
+            params : {
+                reg: registration
             }
-        }).success(function (data, status, headers, config) {
-            console.log("success data", data);
-
-        }).error(function (data, status, headers, config) {
-            console.log("error data", data);
+        }
+        ).success(function (response, status, headers, config) {
+            //check response
+            if (response.success) {
+                console.log("response.data", response.data)
+            }
+            else
+            console.log("bad response", response);
+          
+        }).error(function (response, status, headers, config) {
+            console.log("error data", response);
         })
     }
         
@@ -97,12 +104,10 @@ angular.module('app', ['ionic'])
     // Set up the various states which the app can be in.
     // Each state's controller can be found in controllers.js
     $stateProvider
-
         .state('home', {
             url: '/home',
             templateUrl: 'views/home.html'
         })
-
 
         .state('search', {
             url: '/search',
@@ -113,16 +118,13 @@ angular.module('app', ['ionic'])
           url: '/newincident',
           templateUrl: 'views/newincident.html'
       })
-    .state('login', {
-        url: '/login',
-        templateUrl: 'views/login.html'
-    })
+        .state('login', {
+            url: '/login',
+            templateUrl: 'views/login.html'
+        });
 
-      
-    ;
-
+     
     // if none of the above states are matched, use this as the fallback
-
     $urlRouterProvider.otherwise('home');
 
 
