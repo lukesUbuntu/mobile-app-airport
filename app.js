@@ -66,20 +66,37 @@ angular.module('app', ['ionic'])
 })
 
 //search a taxi record
-.controller('searchTaxi', ['$scope', '$http',  function ($scope, $http) {
-  
+.controller('searchTaxi', ['$scope', '$http', '$ionicLoading','$ionicPopup'
+                , function ($scope, $http, $ionicLoading,$ionicPopup) {
+    //************show and hide boxs***********/
+    $scope.show = function () {
+        $ionicLoading.show({
+            template: 'Loading...'
+        });
+    };
+    $scope.hide = function () {
+        $ionicLoading.hide();
+    };
+    //************basic alert box***********/
+    $scope.showAlert = function ($message) {
+        var alertPopup = $ionicPopup.alert({
+            title: 'Search Failed!',
+            template: $message
+        });
+    }
+    //************Search Ajax button***********/
     $scope.search = function (registration) {
-        
+       
         console.log("reg", registration)
         //check reg
         //@todo add no registration was provided
-        if (typeof registration == "undefined" || registration.length < 3) return false; //return error message no reg
+        if (typeof registration == "undefined" || registration.length < 2) {
+            $scope.showAlert("Incorrect REGISTRATION details")
+            return false; //return error message no reg
+        }
+        //show loading as we are going to do ajax call
+        $scope.show();
 
-        $scope.show = function () {
-            $ionicLoading.show({
-                template: 'Loading...'
-            });
-        };
         //https://docs.angularjs.org/api/ng/service/$http
         $http.jsonp(api.call('getRegistration'),{
             params : {
@@ -93,12 +110,14 @@ angular.module('app', ['ionic'])
                 $scope.taxi_info = response.data;
                 $scope.searchResults = true;
             }
-            else
+            else {
+                //*****received bad response from server send message to user***///
+                $scope.showAlert(response.data)
                 console.log("bad response", response);
+            }
+               
+                setTimeout(function () { $scope.hide(); }, 100)
 
-            $scope.hide = function () {
-                $ionicLoading.hide();
-            };
         }).error(function (response, status, headers, config) {
             console.log("error data", response);
             $scope.hide = function () {
