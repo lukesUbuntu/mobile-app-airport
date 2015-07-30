@@ -6,19 +6,11 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-var api = {
-    path: "http://taxi.nzhost.me/api/",
-    key: "",
-    call: function (call) {
-        return this.path + call + '?callback=JSON_CALLBACK';
-    }
-}
 
 
+var app = angular.module('app', ['ionic']);
 
-angular.module('app', ['ionic'])
-
-.run(function ($ionicPlatform) {
+app.run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -32,19 +24,27 @@ angular.module('app', ['ionic'])
     });
 })
 
-
- 
+/**
+@name : taxilist 
+@author : mike murray
+@description :
+**/
 .controller('taxilist', function ($scope) {
        
-       $scope.taxies = [
-       { rego: "FRG567", Name: "John Smith", Cab: "22" },
-       { rego: "KGV456", Name: "Jane Smith", Cab: "18" },
-       { rego: "bgh768", Name: "Ben Smith", Cab: "65" },
-       { rego: "kdg568", Name: "Sam Smith", Cab: "121" },
-       { rego: "kkf844", Name: "Neil Smith", Cab: "94" }];
+    $scope.taxies = [
+    { rego: "FRG567", Name: "John Smith", Cab: "22" },
+    { rego: "KGV456", Name: "Jane Smith", Cab: "18" },
+    { rego: "bgh768", Name: "Ben Smith", Cab: "65" },
+    { rego: "kdg568", Name: "Sam Smith", Cab: "121" },
+    { rego: "kkf844", Name: "Neil Smith", Cab: "94" }];
 
-   })
+})
 
+/**
+@name : thiscontroller 
+@author : mike murray
+@description :
+**/
 .controller('thiscontroller', function ($scope, $ionicPopup, $timeout) {
   
 
@@ -63,11 +63,47 @@ angular.module('app', ['ionic'])
     };
 
   
+});
+
+/**
+@name : taxiApi 
+@author : Luke Hardiman
+@description : handles the calls to the taxi api
+**/
+
+app.factory('taxiApi', function ($http) {
+    var api = {
+        path: "http://taxi.nzhost.me/api/",
+        key: "",//note implmented
+        call: function (call) {
+            return this.path + call + '?callback=JSON_CALLBACK';
+        }
+    }
+    var taxiApi = function (call, prams) {
+        // $http returns a promise, which has a then function, which also returns a promise
+        var promise = $http.jsonp(api.call(call), {
+                params: prams
+            }
+        ).then(function (response) {
+            // The then function here is an opportunity to modify the response
+            console.log("taxiApi response", response);
+            // The return value gets picked up by the then in the controller.
+            return response.data;
+        });
+        // Return the promise to the controller
+        return promise;
+        
+    };
+    return taxiApi;
 })
 
-//search a taxi record
-.controller('searchTaxi', ['$scope', '$http', '$ionicLoading','$ionicPopup'
-                , function ($scope, $http, $ionicLoading,$ionicPopup) {
+
+/**
+@name : searchTaxi 
+@author : Luke Hardiman
+@description : searches a taxi and renders information back into view
+**/
+.controller('searchTaxi', function ($scope, taxiApi, $ionicLoading, $ionicPopup) {
     //************show and hide boxs***********/
     $scope.show = function () {
         $ionicLoading.show({
@@ -96,17 +132,13 @@ angular.module('app', ['ionic'])
         }
         //show loading as we are going to do ajax call
         $scope.show();
-
-        //https://docs.angularjs.org/api/ng/service/$http
-        $http.jsonp(api.call('getRegistration'),{
-            params : {
-                reg: registration
-            }
+        var prams = {
+            reg : registration
         }
-        ).success(function (response, status, headers, config) {
-            //check response
+        taxiApi('getDetails', prams).then(function (response) {
+            console.log("getDetails", response)
             if (response.success) {
-                console.log("response.data", response.data)
+               
                 $scope.taxi_info = response.data;
                 $scope.searchResults = true;
             }
@@ -115,24 +147,21 @@ angular.module('app', ['ionic'])
                 $scope.showAlert(response.data)
                 console.log("bad response", response);
             }
-               
-                setTimeout(function () { $scope.hide(); }, 100)
+            setTimeout(function () { $scope.hide(); }, 100)
 
-        }).error(function (response, status, headers, config) {
-            console.log("error data", response);
-            $scope.hide = function () {
-                $ionicLoading.hide();
-            };
         })
+        
+       
+       
     }
 
    
         
 
-}])
+});
 
 
-.config(function ($stateProvider, $urlRouterProvider) {
+app.config(function ($stateProvider, $urlRouterProvider) {
 
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
