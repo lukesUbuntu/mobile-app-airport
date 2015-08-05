@@ -45,7 +45,7 @@ angular.module('app', ['ionic'])
 
    })
 
-.controller('thiscontroller', function ($scope, $ionicPopup, $timeout) {
+.controller('submitreport', function ($scope, $ionicPopup, $timeout) {
   
 
     $scope.showConfirm = function () {

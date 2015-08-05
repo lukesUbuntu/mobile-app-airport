@@ -112,6 +112,7 @@
   <ItemGroup>
     <Content Include="app.js" />
     <Content Include="Controllers\searchTaxi.js" />
+    <Content Include="Controllers\submitreport.js" />
     <Content Include="css\ionicons.min.css" />
     <Content Include="fonts\ionicons.eot" />
     <Content Include="fonts\ionicons.svg" />
