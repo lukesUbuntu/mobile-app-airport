@@ -1,4 +1,14 @@
-﻿angular.module('app').controller('searchTaxi', function($scope, $http, $ionicLoading,$ionicPopup){
+﻿angular.module('app').controller('searchTaxi', function ($scope, $http, $ionicLoading, $ionicPopup) {
+
+
+    var api = {
+        path: "http://taxi.nzhost.me/api/",
+        key: "",
+        call: function (call) {
+            return this.path + call + '?callback=JSON_CALLBACK';
+            
+        }
+    }
 
     //************show and hide boxs***********/
     $scope.show = function () {
@@ -30,9 +40,10 @@
         $scope.show();
 
         //https://docs.angularjs.org/api/ng/service/$http
-        $http.jsonp(api.call('getRegistration'), {
+        $http.jsonp(api.call('getdetails'), {
             params: {
                 reg: registration
+                
             }
         }
         ).success(function (response, status, headers, config) {

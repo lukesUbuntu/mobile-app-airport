@@ -6,13 +6,6 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-var api = {
-    path: "http://taxi.nzhost.me/api/",
-    key: "",
-    call: function (call) {
-        return this.path + call + '?callback=JSON_CALLBACK';
-    }
-}
 
 
 
@@ -34,16 +27,9 @@ angular.module('app', ['ionic'])
 
 
  
-.controller('taxilist', function ($scope) {
-       
-       $scope.taxies = [
-       { rego: "FRG567", Name: "John Smith", Cab: "22" },
-       { rego: "KGV456", Name: "Jane Smith", Cab: "18" },
-       { rego: "bgh768", Name: "Ben Smith", Cab: "65" },
-       { rego: "kdg568", Name: "Sam Smith", Cab: "121" },
-       { rego: "kkf844", Name: "Neil Smith", Cab: "94" }];
+//Removed the test array
 
-   })
+    //todo move this code into the controller that handeles new reports
 
 .controller('submitreport', function ($scope, $ionicPopup, $timeout) {
   
@@ -65,7 +51,7 @@ angular.module('app', ['ionic'])
   
 })
 
-//search a taxi record
+//search a taxi record is now under controllers -> 
 
 
 
