@@ -96,6 +96,10 @@ angular.module('app', ['ionic'])
     .state('details', {
         url: '/details',
         templateUrl: 'views/taxi_details.html'
+    })
+    .state('edit', {
+        url: '/edit',
+        templateUrl: 'views/edit_details.html'
     });
 
      

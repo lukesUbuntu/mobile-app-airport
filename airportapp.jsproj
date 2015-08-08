@@ -111,6 +111,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.js" />
+    <Content Include="Controllers\edit_details.js" />
     <Content Include="Controllers\searchTaxi.js" />
     <Content Include="Controllers\submitreport.js" />
     <Content Include="Controllers\taxi_details.js" />
@@ -208,6 +209,7 @@
     <Content Include="plugins\org.apache.cordova.device\tests\plugin.xml" />
     <Content Include="plugins\org.apache.cordova.device\tests\tests.js" />
     <Content Include="plugins\org.apache.cordova.device\www\device.js" />
+    <Content Include="views\edit_details.html" />
     <Content Include="views\home.html" />
     <Content Include="views\login.html" />
     <Content Include="views\newincident.html" />
