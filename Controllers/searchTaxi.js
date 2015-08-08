@@ -1,12 +1,12 @@
-﻿angular.module('app').controller('searchTaxi', function ($scope, $http, $ionicLoading, $ionicPopup) {
+﻿angular.module('app').controller('searchTaxi', function (searchresults, $scope,$state, $http, $ionicLoading, $ionicPopup) {
 
-
+   
     var api = {
         path: "http://taxi.nzhost.me/api/",
         key: "",
         call: function (call) {
             return this.path + call + '?callback=JSON_CALLBACK';
-            
+
         }
     }
 
@@ -43,13 +43,19 @@
         $http.jsonp(api.call('getdetails'), {
             params: {
                 reg: registration
-                
+
             }
         }
         ).success(function (response, status, headers, config) {
             //check response
             if (response.success) {
                 console.log("response.data", response.data)
+
+                //This will send the object to the defined service, the object will now be avalible to 
+                //other controllers if we inject the service as I have above. Once we are returning multiple results
+                //we will set this below on gotodetails function
+                searchresults.taxiObject = response.data;
+                
                 $scope.taxi_info = response.data;
                 $scope.searchResults = true;
             }
@@ -69,8 +75,9 @@
         })
     }
 
+    $scope.gotodetails = function () {
 
+        $state.go("details");
+    };
 
 });
-
-

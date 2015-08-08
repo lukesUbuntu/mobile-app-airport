@@ -27,12 +27,24 @@ angular.module('app', ['ionic'])
 
 
  
-//Removed the test array
+//todo - Move the Service into a seperate file
 
-    //todo move this code into the controller that handeles new reports
+    // The taxi object will be set when a search result is returned, once we are returning more then one result
+    //we will set this object with the ng-click event rather then the response.
 
+    .service("searchresults", function Results() {
+
+        var searchresults = this;
+
+        searchresults.taxiObject = "Default";
+
+    })
+
+    //I will move this to its own file soon.
 .controller('submitreport', function ($scope, $ionicPopup, $timeout) {
-  
+
+
+
 
     $scope.showConfirm = function () {
         var confirmPopup = $ionicPopup.confirm({
@@ -70,6 +82,7 @@ angular.module('app', ['ionic'])
         .state('search', {
             url: '/search',
             templateUrl: 'views/search.html'
+            
         })
 
       .state('newincident', {
@@ -79,7 +92,11 @@ angular.module('app', ['ionic'])
         .state('login', {
             url: '/login',
             templateUrl: 'views/login.html'
-        });
+        })
+    .state('details', {
+        url: '/details',
+        templateUrl: 'views/taxi_details.html'
+    });
 
      
     // if none of the above states are matched, use this as the fallback

@@ -1,4 +1,4 @@
-﻿<ion-view title="Search">
+﻿<ion-view title="Search" ng-controller="taxilist">
     <ion-content padding="true" class="has-header">
         <form>
             <label class="item item-input" name="search">
@@ -6,9 +6,18 @@
                 <input type="search" placeholder="Enter Rego or ID">
             </label>
         </form>
-        <ul ng-controller="taxilist">
+        
+            
+       
+                <div ng-repeat="profile in taxies" >
 
-            <li ng-repeat="profile in taxies">{{profile}}</li>
-        </ul>
+              
+                </div>
+
+        <button class="button button-stable button-block ">Tap me!</button>
+
+
+            <!--<li ng-repeat="profile in taxies"></li> -->
+        
     </ion-content>
 </ion-view>
