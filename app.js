@@ -35,7 +35,7 @@ angular.module('app', ['ionic'])
     .service("searchresults", function Results() {
 
         var searchresults = this;
-
+        //set this to be default so the object contains something at all times, not sure if I need to do it this way.
         searchresults.taxiObject = "Default";
 
     })
@@ -82,7 +82,7 @@ angular.module('app', ['ionic'])
         .state('search', {
             url: '/search',
             templateUrl: 'views/search.html'
-            
+
         })
 
       .state('newincident', {
@@ -96,10 +96,6 @@ angular.module('app', ['ionic'])
     .state('details', {
         url: '/details',
         templateUrl: 'views/taxi_details.html'
-    })
-    .state('edit', {
-        url: '/edit',
-        templateUrl: 'views/edit_details.html'
     });
 
      
