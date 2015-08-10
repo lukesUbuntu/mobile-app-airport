@@ -13,6 +13,7 @@
                     <ion-item><b>Decal: </b>{{taxi_info.decal }} </ion-item>
                     <ion-item><b>Fleet: </b>{{taxi_info.fleet }} </ion-item>
                     <ion-item><b>Service: </b>{{taxi_info.service }} </ion-item>
+                    <ion-toggle toggle-class="toggle-assertive" name="banaction" ng-model="banaction.isbaned" ng-change="setbanaction(banaction.isbaned)"><b>Ban:</b></ion-toggle>
 
 </ion-list>
       

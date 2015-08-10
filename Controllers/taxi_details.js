@@ -14,7 +14,16 @@
     $scope.openModal = function() {
         $scope.modal.show()
     }
+    //Get the banned flag
+    $scope.banaction = searchresults.taxiObject.banned;
 
+    //Set the banflag
+    
+    $scope.setbanaction = function (banaction) {
+        searchresults.taxiObject.isbanned = banaction;
+        //Check the object and the ban flag is now set
+        console.log("Updated Object:", searchresults.taxiObject)
+    }
     //show error
     $scope.showAlert = function ($message) {
         var alertPopup = $ionicPopup.alert({
