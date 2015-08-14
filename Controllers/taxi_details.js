@@ -1,7 +1,6 @@
 ﻿angular.module('app').controller("taxidetails", function (searchresults, $scope, $ionicModal, $ionicListDelegate, $ionicPopup) {
 
     //get the taxi object from the service
-
     $scope.taxi_info = searchresults.taxiObject;
 
    //create a modal for editing/adding the name
@@ -41,6 +40,10 @@
             return false; 
         }
 
+        if (name.trim().length <= 2) {
+            $scope.showAlert("Not a valid name")
+            return false;
+        }
 
         searchresults.taxiObject.name = name;
         $ionicListDelegate.closeOptionButtons();
@@ -50,6 +53,8 @@
     };
 
     $scope.$on('$destroy', function() {
+        //check if any changes in the taxi object we need to add a previous state to the taxi service
+
         $scope.modal.remove();
     });
 
