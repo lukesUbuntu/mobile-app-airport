@@ -111,6 +111,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.js" />
+    <Content Include="Controllers\searchTaxi.js" />
+    <Content Include="Controllers\submitreport.js" />
+    <Content Include="Controllers\taxi_details.js" />
     <Content Include="css\ionicons.min.css" />
     <Content Include="fonts\ionicons.eot" />
     <Content Include="fonts\ionicons.svg" />
@@ -209,6 +212,7 @@
     <Content Include="views\login.html" />
     <Content Include="views\newincident.html" />
     <Content Include="views\search.html" />
+    <Content Include="views\taxi_details.html" />
     <Folder Include="merges\ios\" />
     <Content Include="merges\windows\scripts\platformOverrides.js" />
     <Content Include="merges\windows\scripts\winstore-jscompat.js" />
@@ -221,6 +225,7 @@
     <Folder Include="res\screens\ios\" />
     <Folder Include="res\screens\windows\" />
     <Folder Include="res\screens\wp8\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="config.xml">

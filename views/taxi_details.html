@@ -1,0 +1,50 @@
+﻿<ion-view title="details" ng-controller="taxidetails">
+    <ion-content padding="true" class="has-header">
+            <h3>Taxi Details</h3>
+        
+            <ion-list>
+                <ion-item>
+                   <b>Name: </b>{{taxi_info.name }}
+                    <ion-option-button class="button-assertive" ng-click="openModal()">Edit</ion-option-button>
+                    </ion-item>
+                   
+                    <ion-item><b>ATO: </b>{{taxi_info.ato }}</ion-item>
+                    <ion-item><b>ID: </b>{{taxi_info.id }} </ion-item>
+                    <ion-item><b>Decal: </b>{{taxi_info.decal }} </ion-item>
+                    <ion-item><b>Fleet: </b>{{taxi_info.fleet }} </ion-item>
+                    <ion-item><b>Service: </b>{{taxi_info.service }} </ion-item>
+                    <ion-toggle toggle-class="toggle-assertive" name="banaction" ng-model="banaction.isbaned" ng-change="setbanaction(banaction.isbaned)"><b>Ban:</b></ion-toggle>
+
+</ion-list>
+      
+        <h3>Vehicle Information</h3>
+        <ion-list>
+   
+    <ion-item><b>Make: </b>{{taxi_info.vehicle.make }} </ion-item>
+     <ion-item><b>Model: </b>{{taxi_info.vehicle.model }} </ion-item>
+     <ion-item><b>Year: </b>{{taxi_info.vehicle.year }} </ion-item>
+</ion-list>
+
+
+
+<!--The below is for the modal to add names, this can be moved to seperate file-->
+    </ion-content>
+</ion-view>
+<script id="edit-name-modal.html" type="text/ng-template">
+    <div class="modal">
+        <ion-header-bar>
+            <h1 class="title">Edit Name</h1>
+        </ion-header-bar>
+        <ion-content>
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Name</span>
+                    <input ng-model="taxiObject.name" type="text" placeholder="{{taxi_info.ato }}">
+                </label>
+
+            </div>
+
+            <button class="button button-full button-energized" ng-click="closeModal(taxiObject.name)">Update</button>
+        </ion-content>
+    </div>
+</script>
