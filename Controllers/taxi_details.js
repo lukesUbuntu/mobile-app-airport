@@ -1,7 +1,16 @@
-﻿angular.module('app').controller("taxidetails", function (searchresults, $scope, $ionicModal, $ionicListDelegate, $ionicPopup) {
+﻿angular.module('app').controller("taxidetails", function (taxiObject, $scope, $ionicModal, $ionicListDelegate, $ionicPopup) {
 
     //get the taxi object from the service
-    $scope.taxi_info = searchresults.taxiObject;
+    //watch our taxi object for changes
+    $scope.$watch(function () {
+            return taxiObject.record;
+        },
+        function(newVal, oldVal) {
+            //set the update record to true if this record has been updated
+            taxiObject.updated =  (oldVal != null && newVal != oldVal)
+        }, true);
+    //pass our taxi object to view
+    $scope.taxi_info = taxiObject.record;
 
    //create a modal for editing/adding the name
     $ionicModal.fromTemplateUrl('edit-name-modal.html', {
@@ -14,14 +23,19 @@
         $scope.modal.show()
     }
     //Get the banned flag
-    $scope.banaction = searchresults.taxiObject.banned;
+    $scope.banaction = taxiObject.record.banned;
 
     //Set the banflag
     
     $scope.setbanaction = function (banaction) {
-        searchresults.taxiObject.isbanned = banaction;
+        //searchresults.taxiObject.isbanned = banaction;
+        //get current
+
+        taxiObject.record.isbanned = banaction;
+
+
         //Check the object and the ban flag is now set
-        console.log("Updated Object:", searchresults.taxiObject)
+        console.log("Updated Object:", taxiObject.record)
     }
     //show error
     $scope.showAlert = function ($message) {
@@ -45,7 +59,7 @@
             return false;
         }
 
-        searchresults.taxiObject.name = name;
+        taxiObject.record.name = name;
         $ionicListDelegate.closeOptionButtons();
 
 
@@ -54,7 +68,9 @@
 
     $scope.$on('$destroy', function() {
         //check if any changes in the taxi object we need to add a previous state to the taxi service
-
+        if (taxiObject.updated){
+            console.log("need to send taxiObject back to server")
+        }
         $scope.modal.remove();
     });
 

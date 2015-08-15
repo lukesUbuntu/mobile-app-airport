@@ -1,5 +1,13 @@
-﻿angular.module('app').controller('searchTaxi', function (searchresults, $scope,$state, $http, $ionicLoading, $ionicPopup) {
+﻿angular.module('app').controller('searchTaxi', function (taxiObject, $scope,$state, $http, $ionicLoading, $ionicPopup) {
 
+    //watch our taxi object for changes
+    $scope.$watch(function () {
+            return taxiObject.record;
+        },
+        function(newVal, oldVal) {
+            //set the update record to true if this record has been updated
+            taxiObject.updated =  (oldVal != null && newVal != oldVal)
+        }, true);
    
     var api = {
         path: "http://taxi.nzhost.me/api/",
@@ -54,9 +62,11 @@
                 //This will send the object to the defined service, the object will now be avalible to 
                 //other controllers if we inject the service as I have above. Once we are returning multiple results
                 //we will set this below on gotodetails function
-                searchresults.taxiObject = response.data;
-                
-                $scope.taxi_info = response.data;
+                //searchresults.taxiObject = response.data;
+                taxiObject.record = response.data;
+                $scope.taxi_info = taxiObject.record;
+
+                //$scope.taxi_info = response.data;
                 $scope.searchResults = true;
             }
             else {

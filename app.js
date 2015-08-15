@@ -32,15 +32,30 @@ angular.module('app', ['ionic'])
     // The taxi object will be set when a search result is returned, once we are returning more then one result
     //we will set this object with the ng-click event rather then the response.
 
-    .service("searchresults", function Results() {
+    .service("searchresults", function() {
 
         var searchresults = this;
+
         //set this to be default so the object contains something at all times, not sure if I need to do it this way.
-        searchresults.taxiObject = "Default";
+        searchresults.taxiObject = null;
+        return searchresults;
 
     })
 
-    //I will move this to its own file soon.
+
+
+    .service("taxiObject", function() {
+
+        var taxiObject = {
+            record : null,
+            updated: false
+        }
+        return taxiObject;
+        //set this to be default so the object contains something at all times, not sure if I need to do it this way.
+       //return taxiObject;
+
+    })
+/*
 .controller('submitreport', function ($scope, $ionicPopup, $timeout) {
 
 
@@ -62,7 +77,7 @@ angular.module('app', ['ionic'])
 
   
 })
-
+*/
 //search a taxi record is now under controllers -> 
 
 
