@@ -64,8 +64,8 @@
                 //we will set this below on gotodetails function
                 //searchresults.taxiObject = response.data;
                 taxiObject.record = response.data;
-                $scope.taxi_info = taxiObject.record;
-
+                $scope.taxi_results = taxiObject.record;
+                //taxi_results
                 //$scope.taxi_info = response.data;
                 $scope.searchResults = true;
             }

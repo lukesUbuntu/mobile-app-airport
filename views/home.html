@@ -15,11 +15,14 @@
         <div ng-show="searchResults" class="ng-hide">
 
                     <header>Results : {{taxi.registration}}</header>
+
                     <!-- our list and list items -->
-                    <ion-list >
+
+                    <ion-list ng-repeat="taxi_info in taxi_results">
                         <ion-item ng-click="gotodetails()">
                             <div class="row">
                                 <div class="col">
+                                    <li>REG : {{taxi_info.vehicle.reg}}</li>
                                     <li>Make : {{taxi_info.vehicle.make + " " + taxi_info.vehicle.model + " " + taxi_info.vehicle.year}}</li>
                                     <li>Decal : {{taxi_info.decal + " fleet : " + taxi_info.fleet }}</li>
                                     <li>ATO : {{taxi_info.ato}}</li>
