@@ -19,7 +19,7 @@
                     <!-- our list and list items -->
 
                     <ion-list ng-repeat="taxi_info in taxi_results">
-                        <ion-item ng-click="gotodetails()">
+                        <ion-item ng-click="gotoDetails(taxi_info.id)">
                             <div class="row">
                                 <div class="col">
                                     <li>REG : {{taxi_info.vehicle.reg}}</li>

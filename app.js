@@ -25,8 +25,6 @@ angular.module('app', ['ionic'])
     });
 })
 
-
- 
 //todo - Move the Service into a seperate file
 
     // The taxi object will be set when a search result is returned, once we are returning more then one result
@@ -43,18 +41,25 @@ angular.module('app', ['ionic'])
     })
 
 
-
-    .service("taxiObject", function() {
+/**
+ * Keeps the taxiObject between controllers
+ */
+.service("taxiObject", function() {
 
         var taxiObject = {
             record : null,
-            updated: false
-        }
+            updated: false,
+            current_record : null,
+            getRecord : function(taxi_id){ //get record from record
+                this.current_record = this.record[taxi_id];
+                return this.record[taxi_id]
+            }
+        };
         return taxiObject;
         //set this to be default so the object contains something at all times, not sure if I need to do it this way.
        //return taxiObject;
+})
 
-    })
 /*
 .controller('submitreport', function ($scope, $ionicPopup, $timeout) {
 

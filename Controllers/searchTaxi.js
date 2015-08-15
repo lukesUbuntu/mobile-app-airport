@@ -85,8 +85,10 @@
         })
     }
 
-    $scope.gotodetails = function () {
-
+    $scope.gotoDetails = function (taxi_id) {
+        //change to a taxi record
+        //@todo pass the id to the details controller
+        taxiObject.getRecord(taxi_id);
         $state.go("details");
     };
 

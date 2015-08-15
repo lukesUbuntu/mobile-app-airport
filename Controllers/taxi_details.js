@@ -9,8 +9,10 @@
             //set the update record to true if this record has been updated
             taxiObject.updated =  (oldVal != null && newVal != oldVal)
         }, true);
+
+
     //pass our taxi object to view
-    $scope.taxi_info = taxiObject.record;
+    $scope.taxi_info = taxiObject.current_record;
 
    //create a modal for editing/adding the name
     $ionicModal.fromTemplateUrl('edit-name-modal.html', {
@@ -68,6 +70,7 @@
 
     $scope.$on('$destroy', function() {
         //check if any changes in the taxi object we need to add a previous state to the taxi service
+        console.log("destroyed")
         if (taxiObject.updated){
             console.log("need to send taxiObject back to server")
         }
