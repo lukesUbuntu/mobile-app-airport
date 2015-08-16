@@ -1,4 +1,4 @@
-﻿angular.module('app').controller("taxidetails", function (taxiObject, $scope, $ionicModal, $ionicListDelegate, $ionicPopup,$ionicLoading) {
+﻿angular.module('app').controller("taxidetails", function (taxiObject, $scope, $ionicModal, $ionicListDelegate, $ionicPopup,$ionicLoading ,$http) {
 
 
 
@@ -13,6 +13,7 @@
 
             if (taxiObject.updated){
                 console.log("need to update object to server");
+                taxiObject.updateRecord(newVal);
                 $scope.saveTaxi(newVal);
             }
         }, true);
@@ -20,7 +21,7 @@
 
     //pass our taxi object to view
     $scope.taxi_info = taxiObject.current_record;
-
+    console.log("rendering taxiObject",taxiObject.current_record)
    //create a modal for editing/adding the name
     $ionicModal.fromTemplateUrl('edit-name-modal.html', {
         scope: $scope,
@@ -30,16 +31,17 @@
     })
     $scope.openModal = function() {
         $scope.modal.show()
-    }
+    };
+
+    console.log("isbanned",taxiObject.current_record.isbanned)
     //Get the banned flag
-    $scope.banaction = taxiObject.current_record.banned;
+    $scope.isbanned = taxiObject.current_record.isbanned;
+
 
     //Set the banflag
-    
     $scope.setbanaction = function (banaction) {
         //searchresults.taxiObject.isbanned = banaction;
         //get current
-
         taxiObject.current_record.isbanned = banaction;
 
 

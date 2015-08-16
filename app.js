@@ -57,9 +57,8 @@ angular.module('app', ['ionic'])
             record : null,
             updated: false,
             current_record : null,
-            setRecord : function(record){
-                this.current_record = null;
-                this.record = record;
+            updateRecord : function(record){
+                this.record[record.id] = record;
             },
             getRecord : function(taxi_id){ //get record from record
                 this.current_record = this.record[taxi_id];
