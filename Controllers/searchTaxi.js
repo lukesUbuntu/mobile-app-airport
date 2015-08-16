@@ -1,22 +1,5 @@
 ﻿angular.module('app').controller('searchTaxi', function (taxiObject, $scope,$state, $http, $ionicLoading, $ionicPopup) {
 
-    //watch our taxi object for changes
-    $scope.$watch(function () {
-            return taxiObject.record;
-        },
-        function(newVal, oldVal) {
-            //set the update record to true if this record has been updated
-            taxiObject.updated =  (oldVal != null && newVal != oldVal)
-        }, true);
-   
-    var api = {
-        path: "http://taxi.nzhost.me/api/",
-        key: "",
-        call: function (call) {
-            return this.path + call + '?callback=JSON_CALLBACK';
-
-        }
-    }
 
     //************show and hide boxs***********/
     $scope.show = function () {

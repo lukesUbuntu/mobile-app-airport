@@ -1,13 +1,20 @@
-﻿angular.module('app').controller("taxidetails", function (taxiObject, $scope, $ionicModal, $ionicListDelegate, $ionicPopup) {
+﻿angular.module('app').controller("taxidetails", function (taxiObject, $scope, $ionicModal, $ionicListDelegate, $ionicPopup,$ionicLoading) {
+
+
 
     //get the taxi object from the service
     //watch our taxi object for changes
     $scope.$watch(function () {
-            return taxiObject.record;
+            return taxiObject.current_record; //what we want to watch
         },
         function(newVal, oldVal) {
-            //set the update record to true if this record has been updated
-            taxiObject.updated =  (oldVal != null && newVal != oldVal)
+            //set the update record to true if this record has been updated make sure its the same record we are verifying
+            taxiObject.updated =  (oldVal != null && newVal.id == oldVal.id && newVal != oldVal)
+
+            if (taxiObject.updated){
+                console.log("need to update object to server");
+                $scope.saveTaxi(newVal);
+            }
         }, true);
 
 
@@ -25,7 +32,7 @@
         $scope.modal.show()
     }
     //Get the banned flag
-    $scope.banaction = taxiObject.record.banned;
+    $scope.banaction = taxiObject.current_record.banned;
 
     //Set the banflag
     
@@ -33,11 +40,11 @@
         //searchresults.taxiObject.isbanned = banaction;
         //get current
 
-        taxiObject.record.isbanned = banaction;
+        taxiObject.current_record.isbanned = banaction;
 
 
         //Check the object and the ban flag is now set
-        console.log("Updated Object:", taxiObject.record)
+        console.log("Updated Object:", taxiObject.current_record)
     }
     //show error
     $scope.showAlert = function ($message) {
@@ -61,7 +68,7 @@
             return false;
         }
 
-        taxiObject.record.name = name;
+        taxiObject.current_record.name = name;
         $ionicListDelegate.closeOptionButtons();
 
 
@@ -70,12 +77,39 @@
 
     $scope.$on('$destroy', function() {
         //check if any changes in the taxi object we need to add a previous state to the taxi service
-        console.log("destroyed")
-        if (taxiObject.updated){
-            console.log("need to send taxiObject back to server")
-        }
+        console.log("destroyed");
         $scope.modal.remove();
     });
+    //************show and hide boxs for saving ***********/
+    $scope.show = function () {
+        $ionicLoading.show({
+            template: 'Updating...'
+        });
+    };
+    $scope.hide = function () {
+        $ionicLoading.hide();
+    };
 
+    //************save taxi record***********/
+    $scope.saveTaxi = function(taxiObject){
+        $scope.show();
+
+        $http.jsonp(api.call('saveDetails'), {
+                params: {
+                    taxi: taxiObject
+
+                }
+            }
+        ).success(function (response, status, headers, config) {
+
+                setTimeout(function () { $scope.hide(); }, 100)
+
+            }).error(function (response, status, headers, config) {
+                console.log("error data", response);
+                $scope.hide = function () {
+                    $ionicLoading.hide();
+                };
+            })
+    };
 
 });

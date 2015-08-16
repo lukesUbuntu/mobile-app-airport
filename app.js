@@ -5,7 +5,14 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
+var api = {
+    path: "http://taxi.nzhost.me/api/",
+    key: "",
+    call: function (call) {
+        return this.path + call + '?callback=JSON_CALLBACK';
 
+    }
+}
 
 
 
@@ -50,6 +57,10 @@ angular.module('app', ['ionic'])
             record : null,
             updated: false,
             current_record : null,
+            setRecord : function(record){
+                this.current_record = null;
+                this.record = record;
+            },
             getRecord : function(taxi_id){ //get record from record
                 this.current_record = this.record[taxi_id];
                 return this.record[taxi_id]
